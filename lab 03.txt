@@ -1,0 +1,125 @@
+ZADANIE 1
+
+
+CREATE TABLE 'postac' (
+'id_postaci" INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+'nazwa' VARCHAR(40),
+'rodzaj' ENUM('wiking','ptak','kobieta'),
+'data_ur' date,
+'wiek' INT UNSIGNED
+);
+
+
+INSERT INTO postac VALUES
+(default, 'Bjorn','wiking','1999-05-12','11'),
+(default, 'Drozd','ptak','1949-04-12','33'),
+(default, 'Tesciowa','kobieta','1929-03-12','55');
+
+
+UPDATE postac SET wiek=88 WHERE nazwa='Tesciowa';
+
+
+ZADANIE 2
+
+CREATE TABLE `walizka` (
+`id_walizki` int NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`pojemnosc` int UNSIGNED NOT NULL,
+‘kolor’ ENUM('rozowy', 'czerwony', 'teczowy', 'zolty'),
+`id_wlasciciela` INT UNSIGNED,
+FOREIGN KEY (id_wlasciciela) REFERENCES postac(id_postaci) ON DELETE CASCADE
+);
+
+
+ALTER TABLE walizka ALTER kolor SET DEFAULT 'rozowy';
+
+INSERT INTO walizka VALUES
+    (default, 10 , default, 1),
+    (default, 5, 'czerwony', 3);
+    
+
+ZADANIE 3
+
+CREATE TABLE `izba` (
+adres_budynku char(30),
+nazwa_izby varchar(50),
+metraz int unsigned,
+wlasciciel int unsigned,
+primary key(adres_budynku, nazwa_izby),
+FOREIGN KEY (wlasciciel) REFERENCES postac(id_postaci) ON DELETE SET NULL
+);
+
+
+ALTER TABLE izba ADD COLUMN kolor_izby char(50) AFTER metraz;
+
+INSERT INTO izba VALUES
+    ('lupinki46', 'spizarnia' , 33, 'czerwony', 1);
+
+
+
+
+ZADANIE 4
+
+CREATE TABLE `przetwory` (
+id_przetwory INT PRIMARY KEY AUTO_INCREMENT,
+rok_produkcji INT(4) DEFAULT 1654,
+id_wykonawcy INT UNSIGNED,
+zawartosc char(200),
+dodatek char(200) DEFAULT 'papryczka chilli',
+id_konsumenta INT UNSIGNED,
+FOREIGN KEY (id_wykonawcy) REFERENCES postac(id_postaci),
+FOREIGN KEY (id_konsumenta) REFERENCES postac(id_postaci)
+);
+
+INSERT INTO przetwory VALUES
+    (default, default , 3 , 'nie wiem co napisac', default, 1);
+
+
+
+
+ZADANIE 5
+
+INSERT INTO postac VALUES
+(default, 'Malik','viking','1999-05-12','11'),
+(default, 'Montana','viking','1949-04-12','13'),
+(default, 'Smietana','viking','1929-03-12','51'),
+(default, 'Fontana','viking','1949-04-12','31'),
+(default, 'GM2L','viking','1929-03-12','53');
+
+CREATE TABLE `statek` (
+nazwa_statku CHAR(100) primary key,
+rodzaj_statku ENUM('korweta','ubot'),
+data_wodowania date,
+max_ladownosc int unsigned);
+
+
+INSERT INTO statek VALUES
+    ('Miotaczognia', 'korweta' , '1939-04-09' , 11),
+    ('Ostry_na_cienkim', 'ubot' , '1934-04-09' , 111);
+
+
+ALTER TABLE postac ADD COLUMN funckja char(100);
+
+
+UPDATE postac SET funckja='kapitan' WHERE nazwa='Bjorn';
+
+ALTER TABLE postac ADD COLUMN statek INT;
+
+ALTER TABLE postac ADD FOREIGN KEY (statek) REFERENCES statek(nazwa_statku) ON DELETE SET NULL;
+
+UPDATE postac SET statek='Miotaczognia' WHERE rodzaj='viking';
+
+delete from izba where nazwa_izby='spizarnia';
+
+drop table izba;
+
+
+
+
+
+
+
+
+trzeba zwrocic uwage na atrybut not null
+
+
+   
