@@ -1,0 +1,34 @@
+1.
+a) DELETE * FROM postac WHERE id_postaci=3 AND WHERE id_postaci=8;
+b) 
+ALTER TABLE `walizka` DROP FOREIGN KEY walizka_ibfk_1;
+ALTER TABLE `przetwory` DROP FOREIGN KEY przetwory_ibfk_1;
+ALTER TABLE `przetwory` DROP FOREIGN KEY przetwory_ibfk_2;
+alter table postac modify id_postaci INT;
+ALTER TABLE postac DROP Primary key;
+
+
+2.
+ALTER TABLE postac ADD COLUMN pesel  char(11);
+ALTER TABLE postac ADD PRIMARY KEY(pesel);
+ALTER TABLE postac MODIFY rodzaj enum('viking','ptak','kobieta','syrena');
+INSERT INTO postac VALUES
+(10, 'Gertruda nieszczera','syrena','1999-10-12','22','kapitan','Miotaczognia','12111144422');
+
+3.
+Update postac set statek='Miotaczognia' Where nazwa LIKE '%a%';
+
+UPDATE statek SET max_ladownosc=max_ladownosc * 0,7 WHERE data_wodowania BETWEEN '1901-01-01' AND '2000-12-31';
+alter table postac add checl (wiek<1000);
+
+
+4
+a)ALTER TABLE postac MODIFY rodzaj enum('viking','ptak','kobieta','syrena','waz');
+INSERT INTO postac VALUES
+(10, 'loko','waz','1999-02-11','21',null,null,'12111124422');
+b)
+create table marynarz like postac;
+
+
+INSERT INTO marynarz select * from postac WHERE statek is not null;
+
