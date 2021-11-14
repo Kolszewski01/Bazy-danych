@@ -32,3 +32,23 @@ create table marynarz like postac;
 
 INSERT INTO marynarz select * from postac WHERE statek is not null;
 
+5
+
+UPDATE postac SET statek=NULL;
+DELETE from postac Where id_postaci=4;
+
+DELETE from statek Where nazwa_statku='Miotaczognia';
+Delete from statek Where nazwa_statku='Ostry_na_Cienkim';
+
+ALTER TABLE postac DROP FOREIGN KEY postac_ibfk_1;
+
+DROP table statek;
+
+
+CREATE TABLE zwierz(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nazwa VARCHAR(200),
+    wiek INT);
+
+INSERT INTO zwierz (nazwa,wiek) SELECT nazwa,wiek FROM postac WHERE (rodzaj='waz' OR rodzaj='ptak');
+
