@@ -1,0 +1,48 @@
+ZADANIE 1 
+1.
+CREATE TABLE olszewskik.kreatura SELECT * FROM wikingowie.kreatura;
+CREATE TABLE olszewskik.zasob SELECT * FROM wikingowie.zasob;
+CREATE TABLE olszewskik.ekwipunek SELECT * FROM wikingowie.ekwipunek;
+
+2.
+SELECT * from zasob;
+
+3.
+SELECT * from zasob WHERE  rodzaj='jedzenie';
+
+4.
+SELECT idZasobu, ilosc, idKreatury FROM zasob, kreatura WHERE zasob.idZasobu=kreatura.idKreatury AND  idKreatury in(1,2,3);
+
+ZADANIE 5
+1.
+SELECT * FROM kreatura WHERE rodzaj != 'wiedzma' AND udzwig > 80;
+2.
+SELECT * FROM zasob WHERE  waga > 2 and waga < 5;
+3.
+SELECT * FROM kreatura WHERE nazwa like '%or%' and udzwig>30 and udzwig<70;
+
+ZADANIE 3
+1. 
+SELECT * FROM zasob WHERE dataPozyskania = MONT(08);
+2.
+SELECT * FROM zasob WHERE rodzaj IS NOT NULL ORDER BY waga ASC;
+3.
+SELECT * FROM kreatura ORDER BY dataUr ASC LIMIT 5;
+
+ZADANIE 4
+1.
+SELECT DISTINCT rodzaj FROM zasob;
+2.
+SELECT  CONCAT(nazwa, "-", rodzaj)  AS nazwa_rodzaj
+FROM kreatura;
+3.
+SELECT ilosc*waga as waga_calkowita FROM zasob where dataPozyskania>'2000-01-01' and dataPozyskania<'2007-01-01' ;
+
+ZADANIE 5
+1.
+SELECT waga*0.3*ilosc as waga_odpadkow FROM zasob where rodzaj='jedzenie';
+SELECT waga*0.7*ilosc as waga_netto FROM zasob where rodzaj='jedzenie';
+2.
+SELECT * FROM zasob WHERE rodzaj is null;
+3.
+SELECT DISTINCT nazwa FROM zasob where nazwa like 'Ba%' or nazwa like '%os' ORDER BY nazwa ASC;
