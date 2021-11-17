@@ -1,0 +1,69 @@
+1.
+
+SELECT rodzaj, avg(waga) from kreatura WHERE rodzaj='wiking' group by rodzaj;
+;
+
+SELECT rodzaj, avg(waga), count(rodzaj) from kreatura group by rodzaj;
+
+SELECT rodzaj, avg(dataUr) FROM kreatura group by rodzaj;
+
+SELECT avg(2021-year(dataUr)), rodzaj FROM kreatura group by rodzaj;
+
+
+
+2
+
+SELECT rodzaj, SUM(waga*ilosc) FROM zasob group by rodzaj;
+
+
+SELECT nazwa, AVG(waga)
+from zasob where ilosc>=4
+group by nazwa having AVG(waga) > 10 ;
+
+
+SELECT COUNT(DISTINCT nazwa), rodzaj FROM zasob WHERE ilosc>1 GROUP by rodzaj;
+
+
+3
+SELECT ekwipunek.idKreatury, SUM(ekwipunek.ilosc)  FROM kreatura
+INNER JOIN ekwipunek
+ON kreatura.idKreatury=ekwipunek.idEkwipunku GROUP BY ekwipunek.idKreatury;
+
+
+
+select kreatura.nazwa, SUM(ekwipunek.ilosc) from kreatura natural join ekwipunek GROUP BY kreatura.nazwa;
+
+
+
+
+
+
+
+SELECT kreatura.nazwa, zasob.nazwa  FROM ((kreatura
+INNER JOIN ekwipunek ON kreatura.idKreatury=ekwipunek.idEkwipunku)
+INNER JOIN zasob ON kreatura.idKreatury=zasob.idZasobu);
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT kreatura.nazwa COUNT(ekwipunek.idKreatury) FROM kreatura.ekwipunek WHERE kreatura.idkreatury=ekwipunek.idKreatury GROUP BY kreatura.nazwa
+where e.idKreatury is null;
+
+
+
+
+
+
+
+
+
+
