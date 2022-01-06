@@ -1,0 +1,18 @@
+Zadanie 1
+SELECT imie, nazwisko, data_urodzenia from pracownik;
+Zadanie 2
+SELECT imie, nazwisko, YEAR(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(`data_urodzenia`))) as wiek from pracownik;
+Zadanie 3
+SELECT dzial.nazwa, count(pracownik.dzial) as ilosc_pracownikow FROM dzial left join pracownik on dzial.id_dzialu=pracownik.dzial group by dzial.nazwa;
+Zadanie 4
+SELECT kategoria.nazwa_kategori, count(towar.kategoria) liczba_produktow FROM kategoria left join towar on kategoria.id_kategori=towar.kategoria group by kategoria.nazwa_kategori;
+Zadanie 5
+SELECT kategoria.nazwa_kategori, towar.nazwa_towaru FROM kategoria left join towar on kategoria.id_kategori=towar.kategoria;
+Zadanie 6
+SELECT ROUND (AVG(pensja),2) as srednia_pensja FROM pracownik;
+Zadanie 8
+SELECT towar.nazwa_towaru, COUNT(pozycja_zamowienia.towar) as sprzedaz FROM towar left join pozycja_zamowienia on towar.id_towaru=pozycja_zamowienia.towar GROUP BY towar.nazwa_towaru ORDER BY sprzedaz DESC LIMIT 10;
+Zadanie 9
+SELECT zamowienie.numer_zamowienia, SUM(pozycja_zamowienia.cena) FROM zamowienie left join pozycja_zamowienia on zamowienie.id_zamowienia=pozycja_zamowienia.zamowienie WHERE data_zamowienia BETWEEN '2017-01-01' AND '2017-03-21' GROUP BY zamowienie.numer_zamowienia;
+Zadanie 10
+SELECT pracownik.imie, pracownik.nazwisko, SUM(pozycja_zamowienia.cena) FROM pracownik INNER join zamowienie on pracownik.id_pracownika=zamowienie.pracownik_id_pracownika INNER JOIN  pozycja_zamowienia on zamowienie.id_zamowienia=pozycja_zamowienia.zamowienie group by pracownik.id_pracownika;
